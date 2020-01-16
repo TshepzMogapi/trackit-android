@@ -11,13 +11,14 @@
         android:theme="@style/AppTheme">
         <activity
             android:exported="true"
-            android:name=".TripsActivity" />
+            android:name=".ProfileActivity"></activity>
         <activity
+            android:name=".TripsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".TripDetailActivity"
             android:label="@string/activity_trip_details_name"
-            android:parentActivityName=".TripsActivity"
-            android:name=".TripDetailActivity">
-        </activity>
-
+            android:parentActivityName=".TripsActivity"></activity>
         <activity
             android:name=".AboutActivity"
             android:exported="true" />
