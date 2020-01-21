@@ -2,14 +2,20 @@ package com.example.trackit;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,10 +24,23 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private static final String TRACKING_LOCATION_KEY = "tracking_location";
 
+    private Location mLastLocation;
+
+    private TextView mLocationTextView;
+
+    private FusedLocationProviderClient mFusedLocationClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mLocationTextView =  findViewById(R.id.tv_location);
+
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(
+                this);
+
     }
 
     public void startTrip(View view) {
@@ -43,6 +62,27 @@ public class MainActivity extends AppCompatActivity {
                     REQUEST_LOCATION_PERMISSION);
         } else {
             Log.d(LOG_TAG, "getLocation: permissions granted");
+
+            mFusedLocationClient.getLastLocation().addOnSuccessListener(
+                    new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+
+                            if (location != null) {
+                                mLastLocation = location;
+                                mLocationTextView.setText(
+                                        getString(R.string.location_text,
+                                                mLastLocation.getLatitude(),
+                                                mLastLocation.getLongitude(),
+                                                mLastLocation.getTime()));
+                            } else {
+                                mLocationTextView.setText("No location found.");
+                            }
+
+                        }
+                    }
+            );
+
         }
     }
 
