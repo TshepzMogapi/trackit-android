@@ -6,6 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/iv_android"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+        app:layout_constraintStart_toStartOf="@+id/left_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/et_start_location"
+        app:srcCompat="@drawable/android_plain"
+        />
+<!--        android:contentDescription="@string/android_image"-->
+<!--        android:cropToPadding="true"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/guide_image_portrait"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:srcCompat="@drawable/android_plain"-->
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
@@ -27,8 +48,8 @@
         android:layout_marginRight="32dp"
         android:layout_marginBottom="8dp"
         android:background="@color/colorPrimary"
-        android:onClick="startTrip"
         android:text="@string/start_trip"
+        android:onClick="startTrip"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"

@@ -1,13 +1,16 @@
 package com.example.trackit;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.LinkedList;
 
 public class TripsActivity extends AppCompatActivity {
 
@@ -18,6 +21,11 @@ public class TripsActivity extends AppCompatActivity {
             "com.example.trackit.extra.MESSAGE";
 
     private EditText mTripEditText;
+
+    private final LinkedList<String> mTripList = new LinkedList<>();
+
+    private RecyclerView mRecyclerView;
+    private TripListAdapter mAdapter;
 
 
 
@@ -32,7 +40,18 @@ public class TripsActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_trips);
 
-        mTripEditText = findViewById(R.id.et_trip_name);
+
+        for (int i = 0; i < 20; i++) {
+            mTripList.addLast("Trip " + i);
+        }
+
+        mRecyclerView = findViewById(R.id.rv_trip);
+
+        mAdapter = new TripListAdapter(this, mTripList);
+
+        mRecyclerView.setAdapter(mAdapter);
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
     }
