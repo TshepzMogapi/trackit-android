@@ -45,7 +45,8 @@ public class TripListAdapter extends
         return mTripList.size();
     }
 
-    class TripViewHolder extends RecyclerView.ViewHolder {
+    class TripViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener {
 
         public final TextView tripItemView;
         final TripListAdapter mAdapter;
@@ -53,6 +54,18 @@ public class TripListAdapter extends
             super(itemView);
             tripItemView = itemView.findViewById(R.id.tv_trip);
             this.mAdapter = adapter;
+            tripItemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int mPosition = getLayoutPosition();
+
+            String element = mTripList.get(mPosition);
+
+            mTripList.set(mPosition, "Clicked!! " + element);
+
+            mAdapter.notifyDataSetChanged();
         }
     }
 }
